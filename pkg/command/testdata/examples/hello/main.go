@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/mitchellh/cli"
+	"github.com/mitchellh/go-glint"
 	"github.com/picatz/lion/pkg/command"
 )
 
@@ -49,10 +50,20 @@ func SayCommandAction(c *command.Object) error {
 		return err
 	}
 
-	if ok, _ := c.Flags.BoolValue("cowboy"); ok {
-		_, err = fmt.Println("howdy", arg)
-	} else {
-		_, err = fmt.Println("hello", arg)
-	}
-	return err
+	d := glint.New()
+	d.Append(
+		glint.Style(
+			glint.TextFunc(func(rows, cols uint) string {
+				if ok, _ := c.Flags.BoolValue("cowboy"); ok {
+					return fmt.Sprintf("🤠 howdy %s\n", arg)
+				} else {
+					return fmt.Sprintf("👋 hello %s\n", arg)
+				}
+			}),
+			glint.Color("green"),
+		),
+	)
+	d.RenderFrame()
+
+	return nil
 }

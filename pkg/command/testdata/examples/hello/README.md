@@ -27,10 +27,10 @@ Flags:
 
 ```console
 $ ./hello say kent
-hello kent
+👋 hello kent
 ```
 
 ```console
 $ ./hello say kent --cowboy
-howdy kent
+🤠 howdy kent
 ```
