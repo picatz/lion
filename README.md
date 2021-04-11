@@ -25,16 +25,16 @@ func sayCommandAction(c *command.Object) error {
 	}
 
 	if ok, _ := c.Flags.BoolValue("cowboy"); ok {
-		_, err = fmt.Println("howdy", arg)
+		fmt.Println("howdy", arg)
 	} else {
-		_, err = fmt.Println("hello", arg)
+		fmt.Println("hello", arg)
 	}
-	return err
+	return nil
 }
 ```
 
 ```console
-$ hello 
+$ hello
 Usage: hello [--version] [--help] <command> [<args>]
 
 Available commands are:
